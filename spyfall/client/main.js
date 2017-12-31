@@ -118,6 +118,7 @@ function generateNewGame(){
     state: "waitingForPlayers",
     location: null,
     lengthInMinutes: 8,
+    lengthInRounds: 5,
     endTime: null,
     paused: false,
     pausedTime: null
