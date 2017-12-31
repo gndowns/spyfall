@@ -2,3 +2,4 @@
 spyfall/settings/production*
 spyfall/settings/dev.json
 spyfall/settings/mup
+*.swp
