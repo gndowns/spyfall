@@ -119,6 +119,7 @@ function generateNewGame(){
     location: null,
     lengthInMinutes: 8,
     lengthInRounds: 5,
+    currentRound: 1,
     endTime: null,
     paused: false,
     pausedTime: null
@@ -467,6 +468,12 @@ Template.lobby.rendered = function (event) {
   var qrcodesvg = new Qrcodesvg(url, "qrcode", 250);
   qrcodesvg.draw();
 };
+
+// number of rounds left in game out of 5
+function getRoundsRemaining() {
+  var game = getCurrentGame();
+  return game.lengthInRounds - game.currentRound;
+}
 
 function getTimeRemaining(){
   var game = getCurrentGame();
