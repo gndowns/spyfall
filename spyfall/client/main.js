@@ -112,12 +112,16 @@ function generateAccessCode(){
     return code;
 }
 
+// this is the main game-state object
+// add all attributes (e.g. currentRound,
+// currentPlayersTurn, etc) here
 function generateNewGame(){
   var game = {
     accessCode: generateAccessCode(),
     state: "waitingForPlayers",
     location: null,
     lengthInMinutes: 8,
+    currentRound: 1,
     endTime: null,
     paused: false,
     pausedTime: null
@@ -467,6 +471,13 @@ Template.lobby.rendered = function (event) {
   qrcodesvg.draw();
 };
 
+// number of rounds left in game out of 5
+function getRoundsRemaining() {
+  var game = getCurrentGame();
+  return game.lengthInRounds - game.currentRound;
+}
+
+// vestigial
 function getTimeRemaining(){
   var game = getCurrentGame();
   var localEndTime = game.endTime - TimeSync.serverOffset();
@@ -505,14 +516,12 @@ Template.gameView.helpers({
     return locations;
   },
   gameFinished: function () {
-    var timeRemaining = getTimeRemaining();
-
-    return timeRemaining === 0;
+    var game = getCurrentGame();
+    return game.currentRound > 5;
   },
   timeRemaining: function () {
-    var timeRemaining = getTimeRemaining();
-
-    return moment(timeRemaining).format('mm[<span>:</span>]ss');
+    var game = getCurrentGame();
+    return "<span>Round " + game.currentRound + "</span>";
   }
 });
 
