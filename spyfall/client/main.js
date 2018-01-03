@@ -471,12 +471,6 @@ Template.lobby.rendered = function (event) {
   qrcodesvg.draw();
 };
 
-// number of rounds left in game out of 5
-function getRoundsRemaining() {
-  var game = getCurrentGame();
-  return game.lengthInRounds - game.currentRound;
-}
-
 // vestigial
 function getTimeRemaining(){
   var game = getCurrentGame();
